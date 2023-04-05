@@ -7,6 +7,7 @@
           style="min-height: 100%"
           background-color="#324057"
           text-color="#fff"
+          router
         >
           <el-menu-item index="manage"
             ><i class="el-icon-menu"></i>首页</el-menu-item
