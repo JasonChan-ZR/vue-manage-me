@@ -18,3 +18,42 @@ export const getUserList = (data) =>
     method: "get",
     params: data,
   });
+
+/**
+ * 登录
+ */
+export const login = (data) =>
+  request({
+    url: "/admin/login",
+    method: "post",
+    data,
+  });
+
+/**
+ * 获取定位城市
+ */
+export const cityGuess = () =>
+  request({
+    url: "/v1/cities",
+    method: "get",
+    params: { type: "guess" },
+  });
+
+/**
+ * 获取餐馆数量
+ */
+export const getResturantsCount = () =>
+  request({
+    url: "/shopping/restaurants/count",
+    method: "get",
+  });
+
+/**
+ * 获取餐馆列表
+ */
+export const getResturants = (data) =>
+  request({
+    url: "/shopping/restaurants",
+    method: "get",
+    params: data,
+  });

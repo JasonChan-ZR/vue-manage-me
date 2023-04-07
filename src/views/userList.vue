@@ -16,6 +16,16 @@
         </el-table-column>
         <el-table-column property="city" label="注册地址"> </el-table-column>
       </el-table>
+      <div class="Pagination" style="text-align: left; margin-top: 10px">
+        <el-pagination
+          @current-change="handleCurrentChange"
+          :current-page="currentPage"
+          :page-size="20"
+          :total="count"
+          layout="prev, pager, next, jumper"
+        >
+        </el-pagination>
+      </div>
     </div>
   </div>
 </template>
@@ -27,9 +37,10 @@ export default {
   data() {
     return {
       tableData: [],
-      count: 0,
       offset: 0,
       limit: 20,
+      currentPage: 1,
+      count: 0,
     };
   },
   created() {
@@ -48,10 +59,10 @@ export default {
         // console.log(countData);
         if (status === 1) {
           this.count = count;
+          this.getUsers();
         } else {
           throw new Error("获取数据失败！！！");
         }
-        this.getUser();
       } catch (error) {
         console.log(error.message);
       }
@@ -59,7 +70,7 @@ export default {
     /**
      * 获取用户列表的函数
      */
-    async getUser() {
+    async getUsers() {
       const users = await getUserList({
         offset: this.offset,
         limit: this.limit,
@@ -73,6 +84,14 @@ export default {
         user.city = item.city;
         this.tableData.push(user);
       });
+    },
+    /**
+     * 当前页改变时的操作函数
+     */
+    handleCurrentChange(val) {
+      this.currentPage = val;
+      this.offset = (val - 1) * this.limit;
+      this.getUsers();
     },
   },
 };
