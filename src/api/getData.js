@@ -57,3 +57,20 @@ export const getResturants = (data) =>
     method: "get",
     params: data,
   });
+
+/**
+ * 获取搜索地址
+ */
+export const searchplace = (data) => {
+  data.type = "search";
+  return request({ url: "v1/pois", method: "get", params: data });
+};
+
+/**
+ * 种类列表
+ */
+export const foodCategory = () =>
+  request({
+    url: "/shopping/v2/restaurant/category",
+    method: "get",
+  });
